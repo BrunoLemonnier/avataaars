@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": true,
@@ -12,7 +12,10 @@
     "noImplicitReturns": true,
     "declaration": true,
     "outDir": "./dist",
-    "lib": ["es6", "dom"]
+    "lib": ["es6", "dom"],
+    "esModuleInterop": true
   },
-  "types": ["jest", "node"]
+  "types": ["jest", "node"],
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "example"]
 }
