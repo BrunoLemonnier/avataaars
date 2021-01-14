@@ -1,1 +1,1 @@
-export { default } from './Default'
+export { DefaultNose } from './Default'

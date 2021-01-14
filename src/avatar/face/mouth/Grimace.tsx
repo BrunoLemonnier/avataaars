@@ -1,16 +1,19 @@
 import * as React from 'react'
 import { uniqueId } from 'lodash'
 
-export default class Grimace extends React.Component {
+export class Grimace extends React.Component {
   static optionValue = 'Grimace'
 
   private path1 = uniqueId('react-path-')
   private mask1 = uniqueId('react-mask-')
 
-  render () {
+  render() {
     const { path1, mask1 } = this
     return (
-      <g id='Mouth/Grimace' transform='translate(2.000000, 52.000000)'>
+      <g
+        id='Mouth/Grimace'
+        transform='translate(2.000000, 52.000000)'
+        data-testid='Mouth/Grimace'>
         <defs>
           <rect id={path1} x='24' y='9' width='60' height='22' rx='11' />
         </defs>

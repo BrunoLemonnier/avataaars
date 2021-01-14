@@ -1,11 +1,14 @@
 import * as React from 'react'
 
-export default class WinkWacky extends React.Component {
+export class WinkWacky extends React.Component {
   static optionValue = 'WinkWacky'
 
-  render () {
+  render() {
     return (
-      <g id='Eyes/Wink-Wacky-😜' transform='translate(0.000000, 8.000000)'>
+      <g
+        id='Eyes/Wink-Wacky-😜'
+        transform='translate(0.000000, 8.000000)'
+        data-testid='Eyes/WinkWacky'>
         <circle
           id='Cornea?-I-don&#39;t-know'
           fill='#FFFFFF'

@@ -1,19 +1,16 @@
 import * as React from 'react'
 
-import Eyebrow from './eyebrow'
-import Eyes from './eyes'
-import Mouth from './mouth'
-import Nose from './nose/Default'
+export * from './eyebrow'
+export * from './eyes'
+export * from './mouth'
+export * from './nose'
 
-export default class Face extends React.Component {
-  render () {
-    return (
-      <g id='Face' transform='translate(76.000000, 82.000000)' fill='#000000'>
-        <Mouth />
-        <Nose />
-        <Eyes />
-        <Eyebrow />
-      </g>
-    )
-  }
+export const Face: React.FC = ({ children }) => {
+  return (
+    <g id='Face' transform='translate(76.000000, 82.000000)' fill='#000000'>
+      {children}
+    </g>
+  )
 }
+
+export default Face

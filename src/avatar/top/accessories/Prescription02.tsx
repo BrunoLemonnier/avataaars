@@ -1,19 +1,20 @@
 import * as React from 'react'
 import { uniqueId } from 'lodash'
 
-export default class Prescription02 extends React.Component {
+export class Prescription02 extends React.Component {
   static optionValue = 'Prescription02'
 
   private filter1 = uniqueId('react-filter-')
 
-  render () {
+  render() {
     const { filter1 } = this
     return (
       <g
         id='Top/_Resources/Prescription-02'
         fill='none'
         transform='translate(62.000000, 85.000000)'
-        strokeWidth='1'>
+        strokeWidth='1'
+        data-testid='Accessories/Prescription02'>
         <defs>
           <filter
             x='-0.8%'

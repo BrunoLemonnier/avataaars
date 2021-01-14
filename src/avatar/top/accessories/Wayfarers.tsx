@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { uniqueId } from 'lodash'
 
-export default class Wayfarers extends React.Component {
+export class Wayfarers extends React.Component {
   static optionValue = 'Wayfarers'
 
   private path1 = uniqueId('react-path-')
@@ -9,14 +9,15 @@ export default class Wayfarers extends React.Component {
   private filter1 = uniqueId('react-filter-')
   private linearGradient1 = uniqueId('react-linear-gradient-')
 
-  render () {
+  render() {
     const { path1, path2, filter1, linearGradient1 } = this
     return (
       <g
         id='Top/_Resources/Wayfarers'
         fill='none'
         transform='translate(62.000000, 85.000000)'
-        strokeWidth='1'>
+        strokeWidth='1'
+        data-testid='Accessories/Wayfarers'>
         <defs>
           <filter
             x='-0.8%'

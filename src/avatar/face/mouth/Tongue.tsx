@@ -1,16 +1,19 @@
 import * as React from 'react'
 import { uniqueId } from 'lodash'
 
-export default class Tongue extends React.Component {
+export class Tongue extends React.Component {
   static optionValue = 'Tongue'
 
   private path1 = uniqueId('react-path-')
   private mask1 = uniqueId('react-mask-')
 
-  render () {
+  render() {
     const { path1, mask1 } = this
     return (
-      <g id='Mouth/Tongue' transform='translate(2.000000, 52.000000)'>
+      <g
+        id='Mouth/Tongue'
+        transform='translate(2.000000, 52.000000)'
+        data-testid='Mouth/Tongue'>
         <defs>
           <path
             d='M29,15.6086957 C30.410031,25.2313711 41.062182,33 54,33 C66.9681454,33 77.6461342,25.183301 79,14.7391304 C79.1012093,14.3397326 78.775269,13 76.826087,13 C56.838426,13 41.7395748,13 31.173913,13 C29.3833142,13 28.870211,14.2404669 29,15.6086957 Z'

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { uniqueId } from 'lodash'
 
-export default class Squint extends React.Component {
+export class Squint extends React.Component {
   static optionValue = 'Squint'
 
   private path1 = uniqueId('react-path-')
@@ -9,10 +9,13 @@ export default class Squint extends React.Component {
   private mask1 = uniqueId('react-mask-')
   private mask2 = uniqueId('react-mask-')
 
-  render () {
+  render() {
     const { path1, path2, mask1, mask2 } = this
     return (
-      <g id='Eyes/Squint-😊' transform='translate(0.000000, 8.000000)'>
+      <g
+        id='Eyes/Squint-😊'
+        transform='translate(0.000000, 8.000000)'
+        data-testid='Eyes/Squint'>
         <defs>
           <path
             d='M14,14.0481187 C23.6099827,14.0481187 28,18.4994466 28,11.5617716 C28,4.62409673 21.7319865,0 14,0 C6.2680135,0 0,4.62409673 0,11.5617716 C0,18.4994466 4.39001726,14.0481187 14,14.0481187 Z'

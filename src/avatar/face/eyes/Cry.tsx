@@ -1,11 +1,14 @@
 import * as React from 'react'
 
-export default class Cry extends React.Component {
+export class Cry extends React.Component {
   static optionValue = 'Cry'
 
-  render () {
+  render() {
     return (
-      <g id='Eyes/Cry-😢' transform='translate(0.000000, 8.000000)'>
+      <g
+        id='Eyes/Cry-😢'
+        transform='translate(0.000000, 8.000000)'
+        data-testid='Eyes/Cry'>
         <circle
           id='Eye'
           fillOpacity='0.599999964'

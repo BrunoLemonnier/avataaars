@@ -1,15 +1,13 @@
 import * as React from 'react'
 import { uniqueId } from 'lodash'
 
-import { GraphicOption, Selector } from '../../options'
-
-export interface Props {
+export interface GraphicProps {
   maskID: string
 }
 
-export class Skull extends React.Component<Props> {
+export class Skull extends React.Component<GraphicProps> {
   static optionValue = 'Skull'
-  render () {
+  render() {
     return (
       <g
         id='Clothing/Graphic/Skull'
@@ -24,9 +22,9 @@ export class Skull extends React.Component<Props> {
   }
 }
 
-export class SkullOutline extends React.Component<Props> {
+export class SkullOutline extends React.Component<GraphicProps> {
   static optionValue = 'SkullOutline'
-  render () {
+  render() {
     return (
       <g
         id='Clothing/Graphic/Skull-Outline'
@@ -62,12 +60,13 @@ export class SkullOutline extends React.Component<Props> {
   }
 }
 
-export class Bat extends React.Component<Props> {
+export class Bat extends React.Component<GraphicProps> {
   static optionValue = 'Bat'
-  render () {
+  render() {
     return (
       <g
         id='Clothing/Graphic/Bat'
+        data-testid='Clothing/Graphic/Bat'
         mask={`url(#${this.props.maskID})`}
         fillRule='evenodd'
         fill='#FFFFFF'>
@@ -79,9 +78,9 @@ export class Bat extends React.Component<Props> {
   }
 }
 
-export class Cumbia extends React.Component<Props> {
+export class Cumbia extends React.Component<GraphicProps> {
   static optionValue = 'Cumbia'
-  render () {
+  render() {
     return (
       <g
         id='Clothing/Graphic/Cumbia'
@@ -142,9 +141,9 @@ export class Cumbia extends React.Component<Props> {
   }
 }
 
-export class Deer extends React.Component<Props> {
+export class Deer extends React.Component<GraphicProps> {
   static optionValue = 'Deer'
-  render () {
+  render() {
     return (
       <g
         id='Clothing/Graphic/Deer'
@@ -159,9 +158,9 @@ export class Deer extends React.Component<Props> {
   }
 }
 
-export class Diamond extends React.Component<Props> {
+export class Diamond extends React.Component<GraphicProps> {
   static optionValue = 'Diamond'
-  render () {
+  render() {
     return (
       <g
         id='Clothing/Graphic/Diamond'
@@ -197,9 +196,9 @@ export class Diamond extends React.Component<Props> {
   }
 }
 
-export class Hola extends React.Component<Props> {
+export class Hola extends React.Component<GraphicProps> {
   static optionValue = 'Hola'
-  render () {
+  render() {
     return (
       <g
         id='Clothing/Graphic/Hola'
@@ -214,9 +213,9 @@ export class Hola extends React.Component<Props> {
   }
 }
 
-export class Selena extends React.Component<Props> {
+export class Selena extends React.Component<GraphicProps> {
   static optionValue = 'Selena'
-  render () {
+  render() {
     return (
       <g
         id='Clothing/Graphic/Selena'
@@ -247,9 +246,9 @@ export class Selena extends React.Component<Props> {
   }
 }
 
-export class Pizza extends React.Component<Props> {
+export class Pizza extends React.Component<GraphicProps> {
   static optionValue = 'Pizza'
-  render () {
+  render() {
     return (
       <g
         id='Clothing/Graphic/Pizza'
@@ -280,10 +279,10 @@ export class Pizza extends React.Component<Props> {
   }
 }
 
-export class Resist extends React.Component<Props> {
+export class Resist extends React.Component<GraphicProps> {
   static optionValue = 'Resist'
 
-  render () {
+  render() {
     return (
       <g
         id='Clothing/Graphic/Resist'
@@ -339,12 +338,12 @@ export class Resist extends React.Component<Props> {
   }
 }
 
-export class Bear extends React.Component<Props> {
+export class Bear extends React.Component<GraphicProps> {
   static optionValue = 'Bear'
   private mask1 = uniqueId('react-mask-')
   private path1 = uniqueId('react-path-')
 
-  render () {
+  render() {
     const { mask1, path1 } = this
     return (
       <g
@@ -376,22 +375,16 @@ export class Bear extends React.Component<Props> {
   }
 }
 
-export default class Graphics extends React.Component<Props> {
-  render () {
-    return (
-      <Selector option={GraphicOption} defaultOption={Skull}>
-        <Bat maskID={this.props.maskID} />
-        <Cumbia maskID={this.props.maskID} />
-        <Deer maskID={this.props.maskID} />
-        <Diamond maskID={this.props.maskID} />
-        <Hola maskID={this.props.maskID} />
-        <Pizza maskID={this.props.maskID} />
-        <Resist maskID={this.props.maskID} />
-        <Selena maskID={this.props.maskID} />
-        <Bear maskID={this.props.maskID} />
-        <SkullOutline maskID={this.props.maskID} />
-        <Skull maskID={this.props.maskID} />
-      </Selector>
-    )
-  }
+export const Graphics = {
+  Bear,
+  Resist,
+  Pizza,
+  Selena,
+  Hola,
+  Diamond,
+  Deer,
+  Cumbia,
+  Bat,
+  SkullOutline,
+  Skull,
 }

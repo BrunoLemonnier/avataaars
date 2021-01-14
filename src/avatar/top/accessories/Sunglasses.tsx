@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { uniqueId } from 'lodash'
 
-export default class Sunglasses extends React.Component {
+export class Sunglasses extends React.Component {
   static optionValue = 'Sunglasses'
 
   private path1 = uniqueId('react-path-')
@@ -10,14 +10,15 @@ export default class Sunglasses extends React.Component {
   private linearGradient1 = uniqueId('react-linear-gradient-')
   private linearGradient2 = uniqueId('react-linear-gradient-')
 
-  render () {
+  render() {
     const { path1, path2, filter1, linearGradient1, linearGradient2 } = this
     return (
       <g
         id='Top/_Resources/Sunglasses'
         fill='none'
         transform='translate(62.000000, 85.000000)'
-        strokeWidth='1'>
+        strokeWidth='1'
+        data-testid='Accessories/Sunglasses'>
         <defs>
           <filter
             x='-0.8%'

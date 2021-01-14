@@ -1,11 +1,14 @@
 import * as React from 'react'
 
-export default class Surprised extends React.Component {
+export class Surprised extends React.Component {
   static optionValue = 'Surprised'
 
-  render () {
+  render() {
     return (
-      <g id='Eyes/Surprised-😳' transform='translate(0.000000, 8.000000)'>
+      <g
+        id='Eyes/Surprised-😳'
+        transform='translate(0.000000, 8.000000)'
+        data-testid='Eyes/Surprised'>
         <circle id='The-White-Stuff' fill='#FFFFFF' cx='30' cy='22' r='14' />
         <circle id='Eye-Ball' fill='#FFFFFF' cx='82' cy='22' r='14' />
         <circle

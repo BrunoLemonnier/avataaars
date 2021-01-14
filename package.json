@@ -12,6 +12,7 @@
   "author": "Bruno Lemonnier",
   "license": "MIT",
   "scripts": {
+    "build": "tsc --project tsconfig.dist.json",
     "lint": "eslint */**/*.{js,ts,tsx} --quiet --fix",
     "test": "react-scripts test"
   },
@@ -24,6 +25,7 @@
     "@types/lodash": "^4.14.167",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "prettier": "^2.2.1",
     "react-scripts": "^4.0.1"
   },
   "dependencies": {

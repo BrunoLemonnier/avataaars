@@ -1,11 +1,14 @@
 import * as React from 'react'
 
-export default class Eating extends React.Component {
+export class Eating extends React.Component {
   static optionValue = 'Eating'
 
-  render () {
+  render() {
     return (
-      <g id='Mouth/Eating' transform='translate(2.000000, 52.000000)'>
+      <g
+        id='Mouth/Eating'
+        transform='translate(2.000000, 52.000000)'
+        data-testid='Mouth/Eating'>
         <g
           id='Om-Nom-Nom'
           opacity='0.599999964'

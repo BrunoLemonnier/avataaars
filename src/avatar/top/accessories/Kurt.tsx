@@ -1,19 +1,20 @@
 import * as React from 'react'
 import { uniqueId } from 'lodash'
 
-export default class Kurt extends React.Component {
+export class Kurt extends React.Component {
   static optionValue = 'Kurt'
 
   private filter1 = uniqueId('react-filter-')
 
-  render () {
+  render() {
     const { filter1 } = this
     return (
       <g
         id='Top/_Resources/Kurt'
         fill='none'
         transform='translate(62.000000, 85.000000)'
-        strokeWidth='1'>
+        strokeWidth='1'
+        data-testid='Accessories/Kurt'>
         <defs>
           <filter
             x='-0.8%'
