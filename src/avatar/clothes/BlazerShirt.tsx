@@ -1,17 +1,25 @@
 import * as React from 'react'
 import { uniqueId } from 'lodash'
 import { setAvailableTypeFor } from '../../options/availableOptions'
+import { Colors } from './Colors'
 
-setAvailableTypeFor && setAvailableTypeFor('BlazerShirt', [])
+setAvailableTypeFor && setAvailableTypeFor('BlazerShirt', ['clotheColor'])
 
-export interface BlazerShirtProps {}
+export interface BlazerShirtProps {
+  clotheColor?: keyof typeof Colors
+}
 
-export const BlazerShirt: React.FC<BlazerShirtProps> = () => {
+export const BlazerShirt: React.FC<BlazerShirtProps> = ({ clotheColor }) => {
   const mask1 = uniqueId('react-mask-')
   const path1 = uniqueId('react-path-')
 
+  const Color = clotheColor ? Colors[clotheColor] : Colors.Black
+
   return (
-    <g id='Clothing/Blazer-+-Shirt' transform='translate(0.000000, 170.000000)'>
+    <g
+      id='Clothing/Blazer-+-Shirt'
+      transform='translate(0.000000, 170.000000)'
+      data-testid='Clothing/BlazerShirt'>
       <defs>
         <path
           d='M133.960472,0.294916112 C170.936473,3.32499816 200,34.2942856 200,72.0517235 L200,81 L0,81 L0,72.0517235 C1.22536245e-14,33.9525631 29.591985,2.76498122 67.0454063,0.219526408 C67.0152598,0.593114549 67,0.969227185 67,1.34762511 C67,13.2107177 81.9984609,22.8276544 100.5,22.8276544 C119.001539,22.8276544 134,13.2107177 134,1.34762511 C134,0.994669088 133.986723,0.64370138 133.960472,0.294916112 Z'
@@ -23,11 +31,7 @@ export const BlazerShirt: React.FC<BlazerShirtProps> = () => {
           <use xlinkHref={'#' + path1} />
         </mask>
         <use id='Clothes' fill='#E6E6E6' xlinkHref={'#' + path1} />
-        <g id='Color/Palette/Black' mask={`url(#${mask1})`} fill='#262E33'>
-          <g transform='translate(-32.000000, -29.000000)' id='🖍Color'>
-            <rect x='0' y='0' width='264' height='110' />
-          </g>
-        </g>
+        <Color maskID={mask1} />
         <g
           id='Shadowy'
           opacity='0.599999964'

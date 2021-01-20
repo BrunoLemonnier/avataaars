@@ -1,14 +1,22 @@
 import * as React from 'react'
 import { uniqueId } from 'lodash'
 import { setAvailableTypeFor } from '../../options/availableOptions'
+import { Colors } from './Colors'
 
-setAvailableTypeFor && setAvailableTypeFor('BlazerSweater', [])
+setAvailableTypeFor && setAvailableTypeFor('BlazerSweater', ['clotheColor'])
 
-export interface BlazerSweaterProps {}
+export interface BlazerSweaterProps {
+  clotheColor?: keyof typeof Colors
+}
 
-export const BlazerSweater: React.FC<BlazerSweaterProps> = () => {
+export const BlazerSweater: React.FC<BlazerSweaterProps> = ({
+  clotheColor,
+}) => {
   const mask1 = uniqueId('react-mask-')
   const path1 = uniqueId('react-path-')
+
+  const Color = clotheColor ? Colors[clotheColor] : Colors.Black
+
   return (
     <g
       id='Clothing/Blazer-+-Sweater'
@@ -29,13 +37,7 @@ export const BlazerSweater: React.FC<BlazerSweaterProps> = () => {
         fillRule='evenodd'
         xlinkHref={'#' + path1}
       />
-      <g
-        id='Color/Palette/Black'
-        mask={`url(#${mask1})`}
-        fillRule='evenodd'
-        fill='#262E33'>
-        <rect id='🖍Color' x='0' y='0' width='264' height='110' />
-      </g>
+      <Color maskID={mask1} />
       <g
         id='Blazer'
         strokeWidth='1'
