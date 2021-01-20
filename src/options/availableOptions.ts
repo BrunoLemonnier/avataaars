@@ -1,4 +1,3 @@
-import type { OptionType } from './Option'
 import { Colors as SkinColors } from '../avatar/Skin'
 import * as Tops from '../avatar/top'
 import * as AccessoriesType from '../avatar/top/accessories'
@@ -13,30 +12,51 @@ import * as Eyes from '../avatar/face/eyes'
 import * as EyeBrows from '../avatar/face/eyebrow'
 import * as Mouths from '../avatar/face/mouth'
 
+export type OptionType =
+  | 'skinColor'
+  //
+  | 'topType'
+  | 'accessoriesType'
+  | 'hatColor'
+  //
+  | 'hairColor'
+  | 'facialHairType'
+  | 'facialHairColor'
+  //
+  | 'clotheType'
+  | 'clotheColor'
+  | 'graphicType'
+  //
+  | 'eyeType'
+  | 'eyebrowType'
+  | 'mouthType'
+
 const availableTypeByOption = new Map<string, OptionType[]>()
 
-export const optionsByType = {
+const ComponentsByType = {
   //
-  skinColor: Object.keys(SkinColors),
-  accessoriesType: Object.keys(AccessoriesType),
+  skinColor: SkinColors,
+  accessoriesType: AccessoriesType,
   //
-  topType: Object.keys(Tops),
-  hatColor: Object.keys(HatColors), // hatColor or  hairColor
-  hairColor: Object.keys(HairColors),
-  facialHairType: Object.keys(FacialHairs),
-  facialHairColor: Object.keys(FacialHairColors),
+  topType: Tops,
+  hatColor: HatColors,
+  hairColor: HairColors,
+  facialHairType: FacialHairs,
+  facialHairColor: FacialHairColors,
   //
-  clotheType: Object.keys(Clothes),
-  clotheColor: Object.keys(ClotheColors),
-  graphicType: Object.keys(ClotheGraphics),
+  clotheType: Clothes,
+  clotheColor: ClotheColors,
+  graphicType: ClotheGraphics,
   //
-  eyeType: Object.keys(Eyes),
-  eyebrowType: Object.keys(EyeBrows),
-  mouthType: Object.keys(Mouths),
+  eyeType: Eyes,
+  eyebrowType: EyeBrows,
+  mouthType: Mouths,
 }
 
+export type Option = typeof ComponentsByType[keyof typeof ComponentsByType]
+
 export const getOptionsByType = (optionType: OptionType) => {
-  return optionsByType[optionType]
+  return Object.keys(ComponentsByType[optionType])
 }
 
 export const setAvailableTypeFor = (
