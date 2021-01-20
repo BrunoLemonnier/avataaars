@@ -1,3 +1,4 @@
+export { NoEyes } from './Blank'
 export { Close } from './Close'
 export { Cry } from './Cry'
 export { DefaultEye } from './Default'

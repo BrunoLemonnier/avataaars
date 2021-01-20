@@ -1,3 +1,4 @@
+export { NoClothes } from './Blank'
 export { BlazerShirt } from './BlazerShirt'
 export { BlazerSweater } from './BlazerSweater'
 export { CollarSweater } from './CollarSweater'

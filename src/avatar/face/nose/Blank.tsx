@@ -1,5 +1,5 @@
 import * as React from 'react'
 
-export const NoFacialHair: React.FC = () => {
+export const NoNose: React.FC = () => {
   return null
 }

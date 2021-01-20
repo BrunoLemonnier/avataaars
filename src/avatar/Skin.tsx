@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-interface SkinProps {
+export interface SkinProps {
   maskID: string
 }
 

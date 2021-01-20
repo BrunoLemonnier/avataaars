@@ -1,3 +1,4 @@
+export { NoEyebrow } from './Blank'
 export { Angry } from './Angry'
 export { AngryNatural } from './AngryNatural'
 export { DefaultEyebrows } from './Default'

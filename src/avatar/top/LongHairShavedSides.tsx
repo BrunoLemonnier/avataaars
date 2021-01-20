@@ -1,6 +1,6 @@
 import { uniqueId } from 'lodash'
 import { Colors as HairColors } from './HairColor'
-import { Blank } from './facialHair/Blank'
+import { NoFacialHair } from './facialHair/Blank'
 import * as FacialHairs from './facialHair'
 import * as Accessories from './accessories'
 import { Colors as FacialHairColor } from './facialHair/Colors'
@@ -23,10 +23,10 @@ export const LongHairShavedSides: React.FC<LongHairShavedSidesProps> = ({
 }) => {
   const FacialHair: React.ComponentType<{
     facialHairColor?: keyof typeof FacialHairColor
-  }> = facialHairType ? FacialHairs[facialHairType] : Blank
+  }> = facialHairType ? FacialHairs[facialHairType] : NoFacialHair
   const Accessory: React.ComponentType = accessoriesType
     ? Accessories[accessoriesType]
-    : Accessories.Blank
+    : Accessories.NoAccessories
   return (
     <LongHairShavedSidesComponent
       FacialHair={<FacialHair facialHairColor={facialHairColor} />}

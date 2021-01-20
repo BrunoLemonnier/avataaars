@@ -1,4 +1,4 @@
-export { Blank } from './Blank'
+export { NoAccessories } from './Blank'
 export { Kurt } from './Kurt'
 export { Prescription01 } from './Prescription01'
 export { Prescription02 } from './Prescription02'

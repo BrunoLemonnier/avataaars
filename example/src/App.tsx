@@ -13,14 +13,16 @@ import Avatar, {
   OptionType,
 } from '@blemon/avataaars'
 
+console.log('clotheType ' + getOptionsByType('clotheType'))
+
 const defaultProps: AvatarProps = {
   skinColor: 'Light',
   //
-  accessoriesType: 'Blank',
+  accessoriesType: 'NoAccessories',
   topType: 'LongHairStraight',
   hairColor: 'BrownDark',
   hatColor: 'PastelOrange',
-  facialHairType: 'Blank',
+  facialHairType: 'NoFacialHair',
   facialHairColor: 'BrownDark',
   //
   clotheType: 'BlazerShirt',

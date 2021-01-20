@@ -1,3 +1,4 @@
+export { Bald } from './Blank'
 export { Eyepatch } from './Eyepatch'
 export { Hat } from './Hat'
 export { Hijab } from './Hijab'

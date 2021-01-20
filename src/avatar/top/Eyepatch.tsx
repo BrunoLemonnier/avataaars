@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { uniqueId } from 'lodash'
-import { Blank } from './facialHair/Blank'
+import { NoFacialHair } from './facialHair/Blank'
 import * as FacialHairs from './facialHair'
 import * as Accessories from './accessories'
 import { Colors as FacialHairColor } from './facialHair/Colors'
@@ -23,10 +23,10 @@ export const Eyepatch: React.FC<EyepatchProps> = ({
 }) => {
   const FacialHair: React.ComponentType<{
     facialHairColor?: keyof typeof FacialHairColor
-  }> = facialHairType ? FacialHairs[facialHairType] : Blank
+  }> = facialHairType ? FacialHairs[facialHairType] : NoFacialHair
   const Accessory: React.ComponentType = accessoriesType
     ? Accessories[accessoriesType]
-    : Accessories.Blank
+    : Accessories.NoAccessories
   return (
     <EyepatchComponent
       FacialHair={<FacialHair facialHairColor={facialHairColor} />}

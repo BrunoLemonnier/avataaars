@@ -16,7 +16,7 @@ export interface HijabProps {
 export const Hijab: React.FC<HijabProps> = ({ hatColor, accessoriesType }) => {
   const Accessory: React.ComponentType = accessoriesType
     ? Accessories[accessoriesType]
-    : Accessories.Blank
+    : Accessories.NoAccessories
   return <HijabComponent Accessory={<Accessory />} hatColor={hatColor} />
 }
 
