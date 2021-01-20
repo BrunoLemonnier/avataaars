@@ -42,10 +42,9 @@ type ClotheProps = {
   graphicType?: keyof typeof Graphics
 }
 
-export type AvatarProps = TopProps &
+export type PartsComponents = TopProps &
   ClotheProps & {
     avatarStyle?: AvatarStyle
-    style?: React.CSSProperties
     //
     skinColor?: keyof typeof Skins
     //
@@ -55,33 +54,54 @@ export type AvatarProps = TopProps &
     eyebrowType?: keyof typeof Eyebrows
     mouthType?: keyof typeof Mouths
   }
+export type AvatarProps = PartsComponents &
+  React.SVGAttributes<SVGSVGElement> & {
+    avatarStyle?: AvatarStyle
+    description?: string
+  }
 
-export const Avatar: React.FC<AvatarProps> = (props) => {
-  const Clothe: React.ComponentType<ClotheProps> = props.clotheType
-    ? Clothes[props.clotheType]
+export const Avatar: React.FC<AvatarProps> = ({
+  avatarStyle,
+  skinColor,
+  description,
+  clotheType,
+  mouthType,
+  eyeType,
+  eyebrowType,
+  topType,
+  hairColor,
+  hatColor,
+  facialHairColor,
+  facialHairType,
+  accessoriesType,
+  clotheColor,
+  graphicType,
+  ...svgAttr
+}) => {
+  const Clothe: React.ComponentType<ClotheProps> = clotheType
+    ? Clothes[clotheType]
     : Clothes.BlazerShirt
-  const Mouth = props.mouthType ? Mouths[props.mouthType] : Mouths.DefaultMouth
-  const Eye = props.eyeType ? Eyes[props.eyeType] : Eyes.DefaultEye
-  const Eyebrow = props.eyebrowType
-    ? Eyebrows[props.eyebrowType]
-    : Eyebrows.DefaultEyebrows
-  const Top: React.ComponentType<TopProps> = props.topType
-    ? Tops[props.topType]
+  const Mouth = mouthType ? Mouths[mouthType] : Mouths.DefaultMouth
+  const Eye = eyeType ? Eyes[eyeType] : Eyes.DefaultEye
+  const Eyebrow = eyebrowType ? Eyebrows[eyebrowType] : Eyebrows.DefaultEyebrows
+  const Top: React.ComponentType<TopProps> = topType
+    ? Tops[topType]
     : Tops.LongHairStraight
 
   return (
     <AvatarComponent
-      avatarStyle={props.avatarStyle}
-      skinColor={props.skinColor}
-      style={props.style}
+      avatarStyle={avatarStyle}
+      description={description}
+      skinColor={skinColor}
+      {...svgAttr}
       //
       Top={
         <Top
-          hairColor={props.hairColor}
-          hatColor={props.hatColor}
-          facialHairColor={props.facialHairColor}
-          facialHairType={props.facialHairType}
-          accessoriesType={props.accessoriesType}
+          hairColor={hairColor}
+          hatColor={hatColor}
+          facialHairColor={facialHairColor}
+          facialHairType={facialHairType}
+          accessoriesType={accessoriesType}
         />
       }
       //
@@ -90,17 +110,12 @@ export const Avatar: React.FC<AvatarProps> = (props) => {
       Nose={<Noses.DefaultNose />}
       Mouth={<Mouth />}
       //
-      Clothe={
-        <Clothe
-          clotheColor={props.clotheColor}
-          graphicType={props.graphicType}
-        />
-      }
+      Clothe={<Clothe clotheColor={clotheColor} graphicType={graphicType} />}
     />
   )
 }
 
-export interface Parts {
+export interface PartElements {
   skinColor?: keyof typeof Skins
   Clothe: React.ReactElement
   Mouth: React.ReactElement
@@ -110,27 +125,34 @@ export interface Parts {
   Top: React.ReactElement
 }
 
-export interface AvatarComponentProps extends Parts {
-  avatarStyle?: AvatarStyle
-  style?: React.CSSProperties
-}
+export type AvatarComponentProps = PartElements &
+  React.SVGAttributes<SVGSVGElement> & {
+    avatarStyle?: AvatarStyle
+    description?: string
+  }
 
-export const AvatarComponent: React.FC<AvatarComponentProps> = (props) => {
-  const { avatarStyle } = props
-
+export const AvatarComponent: React.FC<AvatarComponentProps> = ({
+  avatarStyle,
+  skinColor,
+  description,
+  Clothe,
+  Mouth,
+  Nose,
+  Eye,
+  Eyebrow,
+  Top,
+  ...svgAttr
+}) => {
   const circle = avatarStyle === AvatarStyle.Circle
-  const Skin = props.skinColor ? Skins[props.skinColor] : Skins.Light
-  const { Clothe, Mouth, Nose, Eye, Eyebrow, Top } = props
+  const Skin = skinColor ? Skins[skinColor] : Skins.Light
   return (
     <svg
-      style={props.style}
-      width='264px'
-      height='280px'
+      {...svgAttr}
       viewBox='0 0 264 280'
       version='1.1'
       xmlns='http://www.w3.org/2000/svg'
       xmlnsXlink='http://www.w3.org/1999/xlink'>
-      <desc>Created with getavataaars.com</desc>
+      {description ? <desc>{description}</desc> : null}
       <defs>
         <circle id='path-1' cx='120' cy='120' r='120' />
         <path
