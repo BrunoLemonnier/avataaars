@@ -1,13 +1,14 @@
 import * as React from 'react'
 
-export class DefaultEyebrows extends React.Component {
+export class DefaultEyebrows extends React.Component<{ opacity?: number }> {
   static optionValue = 'Default'
 
   render() {
     return (
       <g
         id='Eyebrow/Outline/Default'
-        fillOpacity='0.599999964'
+        fillOpacity={0.599999964 * (this.props?.opacity || 1)}
+        opacity={this.props?.opacity}
         data-testid='Eyebrow/Default'>
         <g id='I-Browse' transform='translate(12.000000, 6.000000)'>
           <path
@@ -26,3 +27,5 @@ export class DefaultEyebrows extends React.Component {
     )
   }
 }
+
+export const Component = DefaultEyebrows

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { uniqueId } from 'lodash'
 
-export class Squint extends React.Component {
+export class Squint extends React.Component<{ opacity?: number }> {
   static optionValue = 'Squint'
 
   private path1 = uniqueId('react-path-')
@@ -58,3 +58,5 @@ export class Squint extends React.Component {
     )
   }
 }
+
+export const Component = Squint

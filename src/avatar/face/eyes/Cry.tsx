@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export class Cry extends React.Component {
+export class Cry extends React.Component<{ opacity?: number }> {
   static optionValue = 'Cry'
 
   render() {
@@ -11,7 +11,8 @@ export class Cry extends React.Component {
         data-testid='Eyes/Cry'>
         <circle
           id='Eye'
-          fillOpacity='0.599999964'
+          fillOpacity={0.599999964 * (this.props?.opacity || 1)}
+          opacity={this.props?.opacity}
           fill='#000000'
           fillRule='evenodd'
           cx='30'
@@ -26,7 +27,8 @@ export class Cry extends React.Component {
         />
         <circle
           id='Eye'
-          fillOpacity='0.599999964'
+          fillOpacity={0.599999964 * (this.props?.opacity || 1)}
+          opacity={this.props?.opacity}
           fill='#000000'
           fillRule='evenodd'
           cx='82'
@@ -37,3 +39,5 @@ export class Cry extends React.Component {
     )
   }
 }
+
+export const Component = Cry

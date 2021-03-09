@@ -22,3 +22,5 @@ export default class FrownNatural extends React.Component {
     )
   }
 }
+
+export const Component = FrownNatural

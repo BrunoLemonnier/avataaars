@@ -11,9 +11,9 @@ const someProps: Record<string, string> = {
   skinColor: 'Yellow',
   //
   accessoriesType: 'Wayfarers',
-  topType: 'LongHairCurvy',
+  hairStyleType: 'LongHairCurvy',
   hairColor: 'BrownDark',
-  //hatColor: 'PastelOrange',
+  //headgearColor: 'PastelOrange',
   facialHairType: 'BeardMajestic',
   facialHairColor: 'BlondeGolden',
   //
@@ -29,7 +29,7 @@ const someProps: Record<string, string> = {
 it('renders Avatar with defined props (with hairs)', async () => {
   render(<Avatar avatarStyle={AvatarStyle.Circle} {...someProps} />)
   screen.queryByTestId(`Accessories/${someProps.accessoriesType}`)
-  testHair(someProps.topType, someProps.hairColor)
+  testHair(someProps.hairStyleType, someProps.hairColor)
   testFacialHair(someProps.facialHairType, someProps.facialHairColor)
   screen.queryByTestId(`Clothing/${someProps.clotheType}`)
   expect(
@@ -39,17 +39,17 @@ it('renders Avatar with defined props (with hairs)', async () => {
 })
 
 it('renders Avatar with defined props (with hat)', async () => {
-  const { hairColor, topType, ...otherProps } = someProps
+  const { hairStyleType, ...otherProps } = someProps
   const props: Record<string, string> = {
     ...otherProps,
-    topType: 'WinterHat2',
-    hatColor: 'PastelBlue',
+    hairStyleType: 'WinterHat2',
+    headgearColor: 'PastelBlue',
   }
   render(<Avatar avatarStyle={AvatarStyle.Circle} {...props} />)
   expect(
     screen.queryByTestId(`Accessories/${props.accessoriesType}`)
   ).toBeTruthy()
-  testHat(props.topType, props.hatColor)
+  testHat(props.hairStyleType, props.headgearColor)
   testFacialHair(props.facialHairType, props.facialHairColor)
   expect(screen.queryByTestId(`Clothing/${props.clotheType}`)).toBeTruthy()
   expect(screen.queryByTestId(`Color/Clothe/${props.clotheColor}`)).toBeTruthy()
@@ -87,11 +87,13 @@ function testFacialHair(facialHairType: string, facialHairColor: string) {
 }
 
 function testHair(hairType: string, hairColor: string) {
-  expect(screen.queryByTestId(`Top/${hairType}`)).toBeTruthy()
+  expect(screen.queryByTestId(`Style/${hairType}`)).toBeTruthy()
   expect(screen.queryByTestId(`Color/Hair/${hairColor}`)).toBeTruthy()
 }
 
-function testHat(topType: string, hatColor: string) {
-  expect(screen.queryByTestId(`Top/${topType}`)).toBeTruthy()
-  expect(screen.queryByTestId(`Color/HatColor/${hatColor}`)).toBeTruthy()
+function testHat(hairStyleType: string, headgearColor: string) {
+  expect(screen.queryByTestId(`Style/${hairStyleType}`)).toBeTruthy()
+  expect(
+    screen.queryByTestId(`Color/HeadgearColor/${headgearColor}`)
+  ).toBeTruthy()
 }

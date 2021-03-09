@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { uniqueId } from 'lodash'
+import { AvatarModule, getAvatarModule } from '../AvatarPart'
 
 export interface GraphicProps {
   maskID: string
@@ -388,3 +389,13 @@ export const Graphics = {
   SkullOutline,
   Skull,
 }
+
+export const Components = Graphics
+
+export const AvatarModules = Object.entries(Graphics).reduce(
+  (modules, [name, Component]) => {
+    modules[name] = getAvatarModule({ Component })
+    return modules
+  },
+  {} as Record<string, AvatarModule>
+)

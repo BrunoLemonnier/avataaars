@@ -1,9 +1,21 @@
-import * as React from 'react'
+import * as Eyebrow from './eyebrow'
+import * as Eyes from './eyes'
+import * as Mouth from './mouth'
+import * as Nose from './nose'
 
-export * from './eyebrow'
-export * from './eyes'
-export * from './mouth'
-export * from './nose'
+export const AvatarModules = {
+  ...Eyebrow.AvatarModules,
+  ...Eyes.AvatarModules,
+  ...Mouth.AvatarModules,
+  ...Nose.AvatarModules,
+}
+
+export const Components = {
+  ...Eyebrow.Components,
+  ...Eyes.Components,
+  ...Mouth.Components,
+  ...Nose.Components,
+}
 
 export const Face: React.FC = ({ children }) => {
   return (

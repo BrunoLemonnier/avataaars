@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { uniqueId } from 'lodash'
 
-export class Concerned extends React.Component {
+export class Concerned extends React.Component<{ opacity?: number }> {
   static optionValue = 'Concerned'
 
   private path1 = uniqueId('react-path-')
@@ -28,7 +28,8 @@ export class Concerned extends React.Component {
         </mask>
         <use
           id='Mouth'
-          fillOpacity='0.699999988'
+          fillOpacity={0.699999988 * (this.props?.opacity || 1)}
+          opacity={this.props?.opacity}
           fill='#000000'
           fillRule='evenodd'
           transform='translate(54.003637, 22.500000) scale(1, -1) translate(-54.003637, -22.500000) '
@@ -60,3 +61,5 @@ export class Concerned extends React.Component {
     )
   }
 }
+
+export const Component = Concerned

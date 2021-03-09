@@ -1,16 +1,16 @@
-import * as React from 'react'
 import { uniqueId } from 'lodash'
-import { setAvailableTypeFor } from '../../options/availableOptions'
 import { Colors } from './Colors'
 
-setAvailableTypeFor && setAvailableTypeFor('BlazerSweater', ['clotheColor'])
+export const associatedTypes = ['clotheColor']
 
 export interface BlazerSweaterProps {
   clotheColor?: keyof typeof Colors
+  clotheOpacity?: number
 }
 
 export const BlazerSweater: React.FC<BlazerSweaterProps> = ({
   clotheColor,
+  clotheOpacity = 1,
 }) => {
   const mask1 = uniqueId('react-mask-')
   const path1 = uniqueId('react-path-')
@@ -21,6 +21,7 @@ export const BlazerSweater: React.FC<BlazerSweaterProps> = ({
     <g
       id='Clothing/Blazer-+-Sweater'
       transform='translate(0.000000, 170.000000)'
+      opacity={clotheOpacity}
       data-testid='Clothing/Blazer+Sweater'>
       <defs>
         <path
@@ -74,3 +75,5 @@ export const BlazerSweater: React.FC<BlazerSweaterProps> = ({
     </g>
   )
 }
+
+export const Component = BlazerSweater

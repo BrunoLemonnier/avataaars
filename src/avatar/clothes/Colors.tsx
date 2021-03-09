@@ -1,10 +1,10 @@
-import * as React from 'react'
+import { AvatarModule, getAvatarModule } from '../AvatarPart'
 
 export interface ClotheColorProps {
   maskID: string
 }
 
-export type ClotheColorConstructor = React.FC<ClotheColorProps>
+export type ClotheColorConstructor = React.ComponentType<ClotheColorProps>
 
 export function makeColor(name: string, color: string) {
   const ClotheColorComponent: ClotheColorConstructor = ({ maskID }) => {
@@ -56,3 +56,13 @@ export const Colors = {
   Red: makeColor('Red', '#FF5C5C'),
   White: makeColor('White', '#FFFFFF'),
 }
+
+export const Components = Colors
+
+export const AvatarModules = Object.entries(Colors).reduce(
+  (modules, [name, Component]) => {
+    modules[name] = getAvatarModule({ Component })
+    return modules
+  },
+  {} as Record<string, AvatarModule>
+)

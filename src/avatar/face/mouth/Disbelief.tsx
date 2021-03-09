@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export class Disbelief extends React.Component {
+export class Disbelief extends React.Component<{ opacity?: number }> {
   static optionValue = 'Disbelief'
 
   render() {
@@ -8,7 +8,8 @@ export class Disbelief extends React.Component {
       <g
         id='Mouth/Disbelief'
         transform='translate(2.000000, 52.000000)'
-        fillOpacity='0.699999988'
+        fillOpacity={0.699999988 * (this.props?.opacity || 1)}
+        opacity={this.props?.opacity}
         fill='#000000'
         data-testid='Mouth/Disbelief'>
         <path
@@ -20,3 +21,5 @@ export class Disbelief extends React.Component {
     )
   }
 }
+
+export const Component = Disbelief

@@ -1,13 +1,14 @@
 import * as React from 'react'
 
-export class RaisedExcited extends React.Component {
+export class RaisedExcited extends React.Component<{ opacity?: number }> {
   static optionValue = 'RaisedExcited'
 
   render() {
     return (
       <g
         id='Eyebrow/Outline/Raised-Excited'
-        fillOpacity='0.599999964'
+        fillOpacity={0.599999964 * (this.props?.opacity || 1)}
+        opacity={this.props?.opacity}
         data-testid='Eyebrow/RaisedExcited'>
         <g id='I-Browse' transform='translate(12.000000, 0.000000)'>
           <path
@@ -26,3 +27,5 @@ export class RaisedExcited extends React.Component {
     )
   }
 }
+
+export const Component = RaisedExcited

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { uniqueId } from 'lodash'
 
-export class Grimace extends React.Component {
+export class Grimace extends React.Component<{ opacity?: number }> {
   static optionValue = 'Grimace'
 
   private path1 = uniqueId('react-path-')
@@ -19,7 +19,8 @@ export class Grimace extends React.Component {
         </defs>
         <rect
           id='Mouth'
-          fillOpacity='0.599999964'
+          fillOpacity={0.599999964 * (this.props?.opacity || 1)}
+          opacity={this.props?.opacity}
           fill='#000000'
           fillRule='evenodd'
           x='22'
@@ -48,3 +49,5 @@ export class Grimace extends React.Component {
     )
   }
 }
+
+export const Component = Grimace

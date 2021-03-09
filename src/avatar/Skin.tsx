@@ -1,7 +1,8 @@
-import * as React from 'react'
+import { AvatarModule, getAvatarModule } from './AvatarPart'
 
 export interface SkinProps {
   maskID: string
+  skinOpacity?: number
 }
 
 export function makeSkinColor(name: string, color: string) {
@@ -28,3 +29,13 @@ export const Colors = {
 }
 
 export default Colors
+
+export const Components = Colors
+
+export const AvatarModules = Object.entries(Colors).reduce(
+  (modules, [name, Component]) => {
+    modules[name] = getAvatarModule({ Component })
+    return modules
+  },
+  {} as Record<string, AvatarModule>
+)

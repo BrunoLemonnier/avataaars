@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export class Dizzy extends React.Component {
+export class Dizzy extends React.Component<{ opacity?: number }> {
   static optionValue = 'Dizzy'
 
   render() {
@@ -8,7 +8,8 @@ export class Dizzy extends React.Component {
       <g
         id='Eyes/X-Dizzy-😵'
         transform='translate(0.000000, 8.000000)'
-        fillOpacity='0.599999964'
+        fillOpacity={0.599999964 * (this.props?.opacity || 1)}
+        opacity={this.props?.opacity}
         fillRule='nonzero'
         data-testid='Eyes/Dizzy'>
         <path
@@ -23,3 +24,5 @@ export class Dizzy extends React.Component {
     )
   }
 }
+
+export const Component = Dizzy

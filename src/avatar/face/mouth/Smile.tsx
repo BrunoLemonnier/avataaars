@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { uniqueId } from 'lodash'
 
-export class Smile extends React.Component {
+export class Smile extends React.Component<{ opacity?: number }> {
   static optionValue = 'Smile'
 
   private path1 = uniqueId('react-path-')
@@ -25,7 +25,8 @@ export class Smile extends React.Component {
         </mask>
         <use
           id='Mouth'
-          fillOpacity='0.699999988'
+          fillOpacity={0.699999988 * (this.props?.opacity || 1)}
+          opacity={this.props?.opacity}
           fill='#000000'
           fillRule='evenodd'
           xlinkHref={'#' + path1}
@@ -56,3 +57,5 @@ export class Smile extends React.Component {
     )
   }
 }
+
+export const Component = Smile

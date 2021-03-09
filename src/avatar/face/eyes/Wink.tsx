@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export class Wink extends React.Component {
+export class Wink extends React.Component<{ opacity?: number }> {
   static optionValue = 'Wink'
 
   render() {
@@ -8,7 +8,8 @@ export class Wink extends React.Component {
       <g
         id='Eyes/Wink-😉'
         transform='translate(0.000000, 8.000000)'
-        fillOpacity='0.599999964'
+        fillOpacity={0.599999964 * (this.props?.opacity || 1)}
+        opacity={this.props?.opacity}
         data-testid='Eyes/Wink'>
         <circle id='Eye' cx='30' cy='22' r='6' />
         <path
@@ -20,3 +21,5 @@ export class Wink extends React.Component {
     )
   }
 }
+
+export const Component = Wink

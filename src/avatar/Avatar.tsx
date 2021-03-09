@@ -1,87 +1,94 @@
-import * as React from 'react'
-
+import React from 'react'
 import { AvatarStyle } from './AvatarStyle'
-import * as Clothes from './clothes'
+import { Components as Clothes } from './clothes'
 import { Colors as ClotheColors } from './clothes/Colors'
 import { Graphics } from './clothes/Graphics'
 import Skins from './Skin'
-import * as Mouths from './face/mouth'
-import * as Noses from './face/nose'
-import * as Eyes from './face/eyes'
-import * as Eyebrows from './face/eyebrow'
-import * as Tops from './top'
-import { Colors as HairColors } from './top/HairColor'
-import { Colors as HatColors } from './top/HatColor'
-import * as Accessories from './top/accessories'
-import * as FacialHairs from './top/facialHair'
-import { Colors as FacialHairColor } from './top/facialHair/Colors'
+import { Components as Mouths } from './face/mouth'
+import { Components as Noses } from './face/nose'
+import { Components as Eyes } from './face/eyes'
+import { Components as Eyebrows } from './face/eyebrow'
+import { Components as Hairs } from './hairstyle/hair'
+import { Components as Headgears } from './hairstyle/headgear'
+import { Colors as HairColors } from './hairstyle/hair/HairColor'
+import { Colors as HeadgearColors } from './hairstyle/headgear/Color'
+import { Components as Accessories } from './hairstyle/accessories'
+import { Components as FacialHairs } from './hairstyle/facialHair'
+import { Colors as FacialHairColor } from './hairstyle/facialHair/Colors'
 import { Face } from './face'
-import { setAvailableRootTypes } from '../options/availableOptions'
+import { TopProps } from './hairstyle/Top'
+import { isHair } from './hairstyle/HairStyle'
+import { OptionType } from '../options'
 
-setAvailableRootTypes([
+export const rootTypes: OptionType[] = [
   'mouthType',
   'eyeType',
   'eyebrowType',
-  'topType',
+  'hairStyleType',
   'accessoriesType',
   'skinColor',
   'clotheType',
-])
+]
 
-type TopProps = {
-  hatColor?: keyof typeof HatColors
+type HairStyleProps = {
+  hairStyleType?: keyof typeof Hairs | keyof typeof Headgears
+  hairStyleOpacity?: number
   hairColor?: keyof typeof HairColors
+  headgearColor?: keyof typeof HeadgearColors
   facialHairType?: keyof typeof FacialHairs
   facialHairColor?: keyof typeof FacialHairColor
+  facialHairOpacity?: number
   accessoriesType?: keyof typeof Accessories
+  accessoriesOpacity?: number
 }
 
 type ClotheProps = {
   clotheType?: keyof typeof Clothes
   clotheColor?: keyof typeof ClotheColors
   graphicType?: keyof typeof Graphics
+  clotheOpacity?: number
 }
 
-export type PartsComponents = TopProps &
+export type PartsComponents = HairStyleProps &
   ClotheProps & {
     avatarStyle?: AvatarStyle
     //
     skinColor?: keyof typeof Skins
     //
-    topType?: keyof typeof Tops
-    //
     eyeType?: keyof typeof Eyes
+    eyeOpacity?: number
+    //
     eyebrowType?: keyof typeof Eyebrows
+    eyebrowOpacity?: number
+    //
     mouthType?: keyof typeof Mouths
+    mouthOpacity?: number
   }
 export type AvatarProps = PartsComponents &
   React.SVGAttributes<SVGSVGElement> & {
     avatarStyle?: AvatarStyle
+    faceOpacity?: number
     description?: string
   }
 
 export const Avatar = React.forwardRef<SVGSVGElement, AvatarProps>(
-  (
-    {
+  (props, ref) => {
+    const {
       avatarStyle,
       skinColor,
+      faceOpacity,
       description,
-      clotheType,
       mouthType,
+      mouthOpacity,
       eyeType,
+      eyeOpacity,
       eyebrowType,
-      topType,
-      hairColor,
-      hatColor,
-      facialHairColor,
-      facialHairType,
-      accessoriesType,
+      eyebrowOpacity,
+      clotheType,
+      clotheOpacity,
       clotheColor,
       graphicType,
-      ...svgAttr
-    },
-    ref
-  ) => {
+    } = props
     const circle = avatarStyle === AvatarStyle.Circle
     const Skin = skinColor ? Skins[skinColor] : Skins.Light
 
@@ -94,15 +101,36 @@ export const Avatar = React.forwardRef<SVGSVGElement, AvatarProps>(
     const Eyebrow = eyebrowType
       ? Eyebrows[eyebrowType]
       : Eyebrows.DefaultEyebrows
-    const Top: React.ComponentType<TopProps> = topType
-      ? Tops[topType]
-      : Tops.LongHairStraight
+
+    const { facialHairType, facialHairColor, facialHairOpacity } = props
+    const FacialHair: React.ComponentType<{
+      color?: keyof typeof FacialHairColor
+      opacity?: number
+    }> = facialHairType ? FacialHairs[facialHairType] : FacialHairs.NoFacialHair
+
+    const { accessoriesType, accessoriesOpacity } = props
+    const Accessory: React.ComponentType<{ opacity?: number }> = accessoriesType
+      ? Accessories[accessoriesType]
+      : Accessories.NoAccessories
+
+    const { hairStyleOpacity, hairStyleType, hairColor, headgearColor } = props
+
+    const HairStyle: React.ComponentType<TopProps> = hairStyleType
+      ? { ...Hairs, ...Headgears }[hairStyleType]
+      : Hairs.LongHairStraight
+    const hairStyleColor = isHair(hairStyleType) ? hairColor : headgearColor
+
+    let svgAttr: React.SVGAttributes<SVGSVGElement> = {}
+    if (props.className) svgAttr.className = props.className
+    if (props.width) svgAttr.width = props.width
+    if (props.height) svgAttr.height = props.height
+    if (props.viewBox) svgAttr.viewBox = props.viewBox
 
     return (
       <svg
         ref={ref}
-        {...svgAttr}
         viewBox='0 0 264 280'
+        {...svgAttr}
         version='1.1'
         xmlns='http://www.w3.org/2000/svg'
         xmlnsXlink='http://www.w3.org/1999/xlink'>
@@ -161,7 +189,10 @@ export const Avatar = React.forwardRef<SVGSVGElement, AvatarProps>(
                 strokeWidth='1'
                 fillRule='evenodd'
                 mask='url(#mask-4)'>
-                <g id='Body' transform='translate(32.000000, 36.000000)'>
+                <g
+                  id='Body'
+                  transform='translate(32.000000, 36.000000)'
+                  opacity={faceOpacity}>
                   <mask id='mask-6' fill='white'>
                     <use xlinkHref='#path-5' />
                   </mask>
@@ -175,20 +206,24 @@ export const Avatar = React.forwardRef<SVGSVGElement, AvatarProps>(
                     mask='url(#mask-6)'
                   />
                 </g>
-                <Top
-                  hairColor={hairColor}
-                  hatColor={hatColor}
-                  facialHairColor={facialHairColor}
-                  facialHairType={facialHairType}
-                  accessoriesType={accessoriesType}
-                />
+                <HairStyle opacity={hairStyleOpacity} color={hairStyleColor}>
+                  <FacialHair
+                    color={facialHairColor}
+                    opacity={facialHairOpacity}
+                  />
+                  <Accessory opacity={accessoriesOpacity} />
+                </HairStyle>
                 <Face>
-                  <Eyebrow />
-                  <Eye />
+                  <Eyebrow opacity={eyebrowOpacity} />
+                  <Eye opacity={eyeOpacity} />
                   <Nose />
-                  <Mouth />
+                  <Mouth opacity={mouthOpacity} />
                 </Face>
-                <Clothe clotheColor={clotheColor} graphicType={graphicType} />
+                <Clothe
+                  clotheColor={clotheColor}
+                  graphicType={graphicType}
+                  clotheOpacity={clotheOpacity}
+                />
               </g>
             </g>
           </g>

@@ -1,59 +1,28 @@
-import * as React from 'react'
+import React from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import Avatar, {
-  getOptionsByType,
-  getAvailableRootTypes,
-  getAvailableSubTypesFor,
+  getComponentsPackageByType,
+  componentPackage,
   AvatarStyle,
   AvatarProps,
   OptionType,
+  rootTypes,
 } from '@blemon/avataaars'
-
-console.log('clotheType ' + getOptionsByType('clotheType'))
-
-const defaultProps: AvatarProps = {
-  skinColor: 'Light',
-  //
-  accessoriesType: 'NoAccessories',
-  topType: 'LongHairStraight',
-  hairColor: 'BrownDark',
-  hatColor: 'PastelOrange',
-  facialHairType: 'NoFacialHair',
-  facialHairColor: 'BrownDark',
-  //
-  clotheType: 'BlazerShirt',
-  clotheColor: 'Blue01',
-  graphicType: 'Bat',
-  //
-  eyeType: 'DefaultEye',
-  eyebrowType: 'DefaultEyebrows',
-  mouthType: 'DefaultMouth',
-}
-
-const App = () => {
-  const selectedOptionsStates = useSelectedOptionsStates(defaultProps)
-  const selectedOptions = Object.entries(selectedOptionsStates).reduce(
-    (selectedOptions, [key, tuple]) => {
-      selectedOptions[key] = tuple[0]
-      return selectedOptions
-    },
-    {} as AvatarProps
-  )
-  return (
-    <>
-      <Avatar avatarStyle={AvatarStyle.Circle} {...selectedOptions} />
-      <Form {...selectedOptionsStates} />
-    </>
-  )
-}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+      display: 'flex',
+      flexDirection: 'row',
+    },
+    avatar: {
+      maxWidth: '800px',
+    },
+    controlRoot: {
       display: 'flex',
       flexWrap: 'wrap',
     },
@@ -69,13 +38,55 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-type FormProps = ReturnType<typeof useSelectedOptionsStates>
-const Form: React.FC<FormProps> = (props) => {
+const defaultProps: AvatarProps = {
+  skinColor: 'Light',
+  //
+  accessoriesType: 'NoAccessories',
+  hairStyleType: 'LongHairStraight',
+  hairColor: 'BrownDark',
+  headgearColor: 'PastelOrange',
+  facialHairType: 'NoFacialHair',
+  facialHairColor: 'BrownDark',
+  //
+  clotheType: 'BlazerShirt',
+  clotheColor: 'Blue01',
+  graphicType: 'Bat',
+  //
+  eyeType: 'DefaultEye',
+  eyebrowType: 'DefaultEyebrows',
+  mouthType: 'DefaultMouth',
+}
+
+const App = () => {
   const classes = useStyles()
-  const rootOptionTypes = getAvailableRootTypes() || []
+  const selectedOptionsStates = useSelectedOptionsStates(defaultProps)
+  const selectedOptions = Object.entries(selectedOptionsStates).reduce(
+    (selectedOptions, [key, tuple]) => {
+      selectedOptions[key] = tuple[0]
+      return selectedOptions
+    },
+    {} as AvatarProps
+  )
   return (
-    <div className={classes.root}>
-      {rootOptionTypes.map((optionType) => {
+    <>
+      <div className={classes.root}>
+        <Avatar
+          className={classes.avatar}
+          avatarStyle={AvatarStyle.Circle}
+          {...selectedOptions}
+        />
+        <Form {...selectedOptionsStates} />
+      </div>
+    </>
+  )
+}
+
+type FormProps = ReturnType<typeof useSelectedOptionsStates>
+const Form: React.ComponentType<FormProps> = (props) => {
+  const classes = useStyles()
+  return (
+    <div className={classes.controlRoot}>
+      {rootTypes.map((optionType) => {
         return (
           <SelectControl
             key={optionType}
@@ -97,7 +108,7 @@ interface SelectControlProps {
   optionType: OptionType
   props: ReturnType<typeof useSelectedOptionsStates>
 }
-const SelectControl: React.FC<SelectControlProps> = ({
+const SelectControl: React.ComponentType<SelectControlProps> = ({
   className,
   selected,
   optionType,
@@ -105,7 +116,11 @@ const SelectControl: React.FC<SelectControlProps> = ({
 }) => {
   const [selectedOption, setSelectedOption] = selected
   const classes = useStyles()
-  const options = getOptionsByType(optionType)
+  const compModules = getComponentsPackageByType(optionType)
+  const selectedAssociatedTypes: OptionType[] = selectedOption
+    ? componentPackage(optionType)[selectedOption]?.associatedTypes || []
+    : []
+  const options = compModules.map((module) => module.name)
   return (
     <div className={className || classes.group}>
       <FormControl key={optionType} className={classes.formControl}>
@@ -126,7 +141,7 @@ const SelectControl: React.FC<SelectControlProps> = ({
           ))}
         </Select>
       </FormControl>
-      {(getAvailableSubTypesFor(selectedOption!) || []).map((optionType) => (
+      {selectedAssociatedTypes.map((optionType) => (
         <SelectControl
           key={optionType}
           props={props}
@@ -141,10 +156,10 @@ const SelectControl: React.FC<SelectControlProps> = ({
 const useSelectedOptionsStates = (defaultProps: AvatarProps) => ({
   skinColor: React.useState(defaultProps['skinColor']),
   //
-  topType: React.useState(defaultProps['topType']),
+  hairStyleType: React.useState(defaultProps['hairStyleType']),
   accessoriesType: React.useState(defaultProps['accessoriesType']),
   hairColor: React.useState(defaultProps['hairColor']),
-  hatColor: React.useState(defaultProps['hatColor']),
+  headgearColor: React.useState(defaultProps['headgearColor']),
   facialHairType: React.useState(defaultProps['facialHairType']),
   facialHairColor: React.useState(defaultProps['facialHairColor']),
   //

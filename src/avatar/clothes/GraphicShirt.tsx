@@ -1,21 +1,20 @@
-import * as React from 'react'
 import { uniqueId } from 'lodash'
 import { Colors } from './Colors'
-import { setAvailableTypeFor } from '../../options/availableOptions'
 import type { ClotheColorConstructor } from './Colors'
 import { Graphics } from './Graphics'
 
-setAvailableTypeFor &&
-  setAvailableTypeFor('GraphicShirt', ['graphicType', 'clotheColor'])
+export const associatedTypes = ['graphicType', 'clotheColor']
 
 export interface GraphicShirtProps {
   clotheColor?: keyof typeof Colors
   graphicType?: keyof typeof Graphics
+  clotheOpacity?: number
 }
 
 export const GraphicShirt: React.FC<GraphicShirtProps> = ({
   clotheColor,
   graphicType,
+  clotheOpacity = 1,
 }) => {
   const mask1 = uniqueId('react-mask-')
   const path1 = uniqueId('react-path-')
@@ -29,6 +28,7 @@ export const GraphicShirt: React.FC<GraphicShirtProps> = ({
     <g
       id='Clothing/Graphic-Shirt'
       transform='translate(0.000000, 170.000000)'
+      opacity={clotheOpacity}
       data-testid='Clothing/GraphicShirt'>
       <defs>
         <path
@@ -50,3 +50,5 @@ export const GraphicShirt: React.FC<GraphicShirtProps> = ({
     </g>
   )
 }
+
+export const Component = GraphicShirt

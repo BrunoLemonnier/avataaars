@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export class EyeRoll extends React.Component {
+export class EyeRoll extends React.Component<{ opacity?: number }> {
   static optionValue = 'EyeRoll'
 
   render() {
@@ -31,3 +31,5 @@ export class EyeRoll extends React.Component {
     )
   }
 }
+
+export const Component = EyeRoll

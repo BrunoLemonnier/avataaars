@@ -1,15 +1,17 @@
-import * as React from 'react'
 import { uniqueId } from 'lodash'
-import { setAvailableTypeFor } from '../../options/availableOptions'
 import { Colors } from './Colors'
 
-setAvailableTypeFor && setAvailableTypeFor('BlazerShirt', ['clotheColor'])
+export const associatedTypes = ['clotheColor']
 
 export interface BlazerShirtProps {
   clotheColor?: keyof typeof Colors
+  clotheOpacity?: number
 }
 
-export const BlazerShirt: React.FC<BlazerShirtProps> = ({ clotheColor }) => {
+export const BlazerShirt: React.FC<BlazerShirtProps> = ({
+  clotheColor,
+  clotheOpacity = 1,
+}) => {
   const mask1 = uniqueId('react-mask-')
   const path1 = uniqueId('react-path-')
 
@@ -19,6 +21,7 @@ export const BlazerShirt: React.FC<BlazerShirtProps> = ({ clotheColor }) => {
     <g
       id='Clothing/Blazer-+-Shirt'
       transform='translate(0.000000, 170.000000)'
+      opacity={clotheOpacity}
       data-testid='Clothing/BlazerShirt'>
       <defs>
         <path
@@ -34,7 +37,7 @@ export const BlazerShirt: React.FC<BlazerShirtProps> = ({ clotheColor }) => {
         <Color maskID={mask1} />
         <g
           id='Shadowy'
-          opacity='0.599999964'
+          opacity={0.599999964 * clotheOpacity}
           mask={`url(#${mask1})`}
           fillOpacity='0.16'
           fill='#000000'>
@@ -74,3 +77,5 @@ export const BlazerShirt: React.FC<BlazerShirtProps> = ({ clotheColor }) => {
     </g>
   )
 }
+
+export const Component = BlazerShirt

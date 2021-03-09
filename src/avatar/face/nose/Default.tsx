@@ -18,3 +18,5 @@ export class DefaultNose extends React.Component {
     )
   }
 }
+
+export const Component = DefaultNose

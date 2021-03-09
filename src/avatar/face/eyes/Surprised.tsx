@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export class Surprised extends React.Component {
+export class Surprised extends React.Component<{ opacity?: number }> {
   static optionValue = 'Surprised'
 
   render() {
@@ -31,3 +31,5 @@ export class Surprised extends React.Component {
     )
   }
 }
+
+export const Component = Surprised

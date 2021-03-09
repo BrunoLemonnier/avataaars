@@ -1,13 +1,14 @@
 import * as React from 'react'
 
-export class Angry extends React.Component {
+export class Angry extends React.Component<{ opacity?: number }> {
   static optionValue = 'Angry'
 
   render() {
     return (
       <g
         id='Eyebrow/Outline/Angry'
-        fillOpacity='0.599999964'
+        fillOpacity={0.599999964 * (this.props?.opacity || 1)}
+        opacity={this.props?.opacity}
         fillRule='nonzero'
         data-testid='Eyebrow/Angry'>
         <path
@@ -23,3 +24,5 @@ export class Angry extends React.Component {
     )
   }
 }
+
+export const Component = Angry

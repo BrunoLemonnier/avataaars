@@ -1,5 +1,5 @@
-import * as React from 'react'
-
-export const NoEyes: React.FC = () => {
+export const NoEyes: React.FC<{ opacity?: number }> = () => {
   return null
 }
+
+export const Component = NoEyes

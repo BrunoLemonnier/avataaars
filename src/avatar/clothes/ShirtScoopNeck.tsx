@@ -1,17 +1,15 @@
-import * as React from 'react'
 import { uniqueId } from 'lodash'
 import { Colors } from './Colors'
-import { setAvailableTypeFor } from '../../options/availableOptions'
 
-setAvailableTypeFor &&
-  setAvailableTypeFor &&
-  setAvailableTypeFor('ShirtScoopNeck', ['clotheColor'])
+export const associatedTypes = ['clotheColor']
 
 export interface ShirtScoopNeckProps {
   clotheColor?: keyof typeof Colors
+  clotheOpacity?: number
 }
 export const ShirtScoopNeck: React.FC<ShirtScoopNeckProps> = ({
   clotheColor,
+  clotheOpacity = 1,
 }) => {
   const mask1 = uniqueId('react-mask-')
   const path1 = uniqueId('react-path-')
@@ -22,6 +20,7 @@ export const ShirtScoopNeck: React.FC<ShirtScoopNeckProps> = ({
     <g
       id='Clothing/Shirt-Scoop-Neck'
       transform='translate(0.000000, 170.000000)'
+      opacity={clotheOpacity}
       data-testid='Clothing/ShirtScoopNeck'>
       <defs>
         <path
@@ -42,3 +41,5 @@ export const ShirtScoopNeck: React.FC<ShirtScoopNeckProps> = ({
     </g>
   )
 }
+
+export const Component = ShirtScoopNeck

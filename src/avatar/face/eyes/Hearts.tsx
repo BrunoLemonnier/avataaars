@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export class Hearts extends React.Component {
+export class Hearts extends React.Component<{ opacity?: number }> {
   static optionValue = 'Hearts'
 
   render() {
@@ -24,3 +24,5 @@ export class Hearts extends React.Component {
     )
   }
 }
+
+export const Component = Hearts

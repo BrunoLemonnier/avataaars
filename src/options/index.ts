@@ -1,1 +1,1 @@
-export * from './availableOptions'
+export * from './options'

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export class Twinkle extends React.Component {
+export class Twinkle extends React.Component<{ opacity?: number }> {
   static optionValue = 'Twinkle'
 
   render() {
@@ -8,7 +8,8 @@ export class Twinkle extends React.Component {
       <g
         id='Mouth/Twinkle'
         transform='translate(2.000000, 52.000000)'
-        fillOpacity='0.599999964'
+        fillOpacity={0.599999964 * (this.props?.opacity || 1)}
+        opacity={this.props?.opacity}
         fillRule='nonzero'
         fill='#000000'
         data-testid='Mouth/Twinkle'>
@@ -20,3 +21,5 @@ export class Twinkle extends React.Component {
     )
   }
 }
+
+export const Component = Twinkle

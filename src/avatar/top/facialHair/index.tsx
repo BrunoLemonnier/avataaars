@@ -1,6 +1,0 @@
-export { NoFacialHair } from './Blank'
-export { BeardLight } from './BeardLight'
-export { BeardMajestic } from './BeardMajestic'
-export { BeardMedium } from './BeardMedium'
-export { MoustacheFancy } from './MoustacheFancy'
-export { MoustacheMagnum } from './MoustacheMagnum'

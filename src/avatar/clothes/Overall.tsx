@@ -1,16 +1,16 @@
-import * as React from 'react'
 import { uniqueId } from 'lodash'
 import { Colors } from './Colors'
-import { setAvailableTypeFor } from '../../options/availableOptions'
 
-setAvailableTypeFor &&
-  setAvailableTypeFor &&
-  setAvailableTypeFor('Overall', ['clotheColor'])
+export const associatedTypes = ['clotheColor']
 
 export interface OverallProps {
   clotheColor?: keyof typeof Colors
+  clotheOpacity?: number
 }
-export const Overall: React.FC<OverallProps> = ({ clotheColor }) => {
+export const Overall: React.FC<OverallProps> = ({
+  clotheColor,
+  clotheOpacity = 1,
+}) => {
   const mask1 = uniqueId('react-mask-')
   const path1 = uniqueId('react-path-')
 
@@ -20,6 +20,7 @@ export const Overall: React.FC<OverallProps> = ({ clotheColor }) => {
     <g
       id='Clothing/Overall'
       transform='translate(0.000000, 170.000000)'
+      opacity={clotheOpacity}
       data-testid='Clothing/Overall'>
       <defs>
         <path
@@ -56,3 +57,5 @@ export const Overall: React.FC<OverallProps> = ({ clotheColor }) => {
     </g>
   )
 }
+
+export const Component = Overall
